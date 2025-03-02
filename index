@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weldon Ruto - Portfolio</title>
+    <style>
+        :root {
+            --primary: #6200EA;
+            --secondary: #03DAC6;
+            --accent: #FF0266;
+            --background: #121212;
+            --surface: #1E1E1E;
+            --text: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .light-effect {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+        }
+
+        #navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: translateX(0);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text);
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .greeting {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0 1rem 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(98, 0, 234, 0.3);
+        }
+
+        .btn.secondary {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 10px 20px rgba(3, 218, 198, 0.2);
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-item a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        section {
+            padding: 5rem 10%;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            height: 3px;
+            width: 80px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .skills {
+            margin-top: 2rem;
+        }
+
+        .skill-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: var(--surface);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background-color: rgba(98, 0, 234, 0.2);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--primary);
+        }
+
+        .education-timeline, .certifications-list, .experience-timeline {
+            margin-top: 3rem;
+        }
+
+        .timeline-item, .certification-item {
+            background-color: var(--surface);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover, .certification-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            left: -30px;
+            top: 25px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: calc(100% + 2rem);
+            background-color: rgba(255, 2, 102, 0.3);
+            left: -23px;
+            top: 25px;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-item h3, .certification-item h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date, .certification-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-details ul, .certification-details {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-left: 1.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--surface);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-tag {
+            font-size: 0.8rem;
+            background-color: rgba(255, 2, 102, 0.2);
+            color: var(--text);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+        }
+
+        .interests-hobbies {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .interest-card {
+            background-color: var(--surface);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .interest-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .interest-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .interest-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .referees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .referee-card {
+            background-color: var(--surface);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .referee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .referee-name {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .referee-position {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .referee-contact {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        #contact {
+            background-color: var(--surface);
+            text-align: center;
+        }
+
+        .contact-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background-color: rgba(3, 218, 198, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-group input:focus ~ label, 
+        .form-group textarea:focus ~ label,
+        .form-group input:not(:placeholder-shown) ~ label,
+        .form-group textarea:not(:placeholder-shown) ~ label {
+            top: -0.8rem;
+            left: 0.8rem;
+            font-size: 0.8rem;
+            background-color: var(--surface);
+            padding: 0 0.5rem;
+            color: var(--secondary);
+        }
+
+        footer {
+            background-color: var(--background);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 7%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--surface);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 1rem;
+            }
+            
+            nav.active ul {
+                display: flex;
+            }
+            
+            .timeline-item::before, .timeline-item::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 3rem 5%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+                margin: 0 0.5rem 1rem 0;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header id="navbar">
+        <a href="#" class="logo">WR</a>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#referees">Referees</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="light-effect" style="width: 300px; height: 300px; background-color: rgba(98, 0, 234, 0.5); top: 20%; left: 10%;"></div>
+        <div class="light-effect" style="width: 250px; height: 250px; background-color: rgba(3, 218, 198, 0.5); bottom: 20%; right: 10%;"></div>
+        <div class="light-effect" style="width: 200px; height: 200px; background-color: rgba(255, 2, 102, 0.5); top: 30%; right: 20%;"></div>
+        
+        <div class="hero-content">
+            <div class="greeting">Hello, I'm</div>
+            <h1>WELDON RUTO</h1>
+            <div class="title">Surveyor — Geospatial Analyst — IT Specialist — Digital Sales Executive</div>
+            <div class="location">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                </svg>
+                Nairobi, Kenya
+            </div>
+            <div>
+                <a href="#contact" class="btn">Get In Touch</a>
+                <a href="#about" class="btn secondary">Learn More</a>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+                        <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    <a href="tel:+254716918786">+254716918786</a>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                    </svg>
+                    <a href="mailto:rutoweldon459@gmail.com">rutoweldon459@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+                    </svg>
+                    <a href="https://portfolio-ops.github.io/portfolio_/" target="_blank">portfolio-ops.github.io/portfolio/</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>A highly skilled Geospatial Analyst, IT Specialist, and Digital Sales Executive with expertise in GIS, remote sensing, and data analytics. I hold a B.Sc. in Geospatial Information Science, complemented by certifications in cloud computing, project management, and IT solutions.</p>
+                <p>I have extensive experience in geospatial data analysis, programming, business development, and digital sales. Proficient in Python, JavaScript, SQL, ArcGIS, QGIS, and cloud platforms. Adept at sales strategy, client relationship management, and digital marketing.</p>
+                <p>My multidisciplinary background allows me to bridge the gap between technical expertise and business acumen, delivering value-driven solutions to complex problems.</p>
+            </div>
+            <div id="skills" class="skills">
+                <div class="skill-categories">
+                    <div class="skill-category">
+                        <h3>Geospatial & Remote Sensing</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">ArcGIS</span>
+                            <span class="skill-tag">QGIS</span>
+                            <span class="skill-tag">AutoCAD</span>
+                            <span class="skill-tag">ERDAS Imagine</span>
+                            <span class="skill-tag">Google Earth Engine</span>
+                            <span class="skill-tag">GPS-based data collection</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Programming</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">PostgreSQL/PostGIS</span>
+                            <span class="skill-tag">MySQL</span>
+<span class="skill-tag">Django</span>
+<span class="skill-tag">Flask</span>
+</div>
+</div>
+<div class="skill-category">
+<h3>Cloud Computing</h3>
+<div class="skill-list">
+<span class="skill-tag">Azure</span>
+<span class="skill-tag">AWS</span>
+<span class="skill-tag">Google Cloud</span>
+<span class="skill-tag">Docker</span>
+<span class="skill-tag">Kubernetes</span>
+<span class="skill-tag">DevOps</span>
+</div>
+</div>
+<div class="skill-category">
+<h3>Business & Sales</h3>
+<div class="skill-list">
+<span class="skill-tag">Digital Marketing</span>
+<span class="skill-tag">CRM</span>
+<span class="skill-tag">Revenue Growth Strategies</span>
+<span class="skill-tag">Customer Acquisition</span>
+<span class="skill-tag">Sales Strategy</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Education Section -->
+<section id="education">
+<h2>Education</h2>
+<div class="education-timeline">
+<div class="timeline-item">
+<h3>Jomo Kenyatta University of Agriculture and Technology (JKUAT)</h3>
+<div class="timeline-date">Sept 2017 – June 2022</div>
+<div class="timeline-details">
+<ul>
+<li>B.Sc. in Geospatial Information Science</li>
+<li>Specialized in GIS, Remote Sensing, and Land Surveying</li>
+<li>Proficient in AutoCAD, ArcGIS, QGIS, ERDAS, and Python for geospatial analysis</li>
+</ul>
+</div>
+</div>
+<div class="timeline-item">
+<h3>ALISON</h3>
+<div class="timeline-date">2022</div>
+<div class="timeline-details">
+<ul>
+<li>Diploma in Business Administration – Specialized in Project Management, Business Strategy, and Operations</li>
+<li>Diploma in Information Technology – Specialized in Networking, Software Development, and IT Support</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience">
+<h2>Experience</h2>
+<div class="experience-timeline">
+<div class="timeline-item">
+<h3>Loop Sales Representative</h3>
+<div class="timeline-date">Jan 2022 - Jan 2024</div>
+<div class="timeline-details">
+<ul>
+<li>Registered business till numbers and provided financial consulting</li>
+<li>Followed up with customers to ensure satisfaction and retention</li>
+<li>Met and exceeded monthly sales targets</li>
+</ul>
+</div>
+</div>
+<div class="timeline-item">
+<h3>Remote Sensing Analyst</h3>
+<div class="timeline-date">Feb 2024 - May 2024</div>
+<div class="timeline-details">
+<ul>
+<li>Acquired and processed satellite imagery</li>
+<li>Conducted land-cover change analysis</li>
+<li>Validated and mapped geospatial data using ArcGIS/QGIS</li>
+</ul>
+</div>
+</div>
+<div class="timeline-item">
+<h3>Surveyor Assistant</h3>
+<div class="timeline-date">March 2020 - June 2020</div>
+<div class="timeline-details">
+<ul>
+<li>Conducted GPS-based surveys and mapping</li>
+<li>Assisted in land digitization and records management</li>
+</ul>
+</div>
+</div>
+<div class="timeline-item">
+<h3>Surveyor Assistant (Internship)</h3>
+<div class="timeline-date">Aug 2019 - Oct 2019</div>
+<div class="timeline-details">
+<ul>
+<li>Gained experience in GIS mapping and remote sensing</li>
+<li>Operated surveying equipment including GPS and total stations</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+<h2>Projects</h2>
+<div class="projects-grid">
+<div class="project-card">
+<div class="project-content">
+<div class="project-title">GIS-based Land Use Mapping</div>
+<div class="project-desc">Developed an automated mapping system using Python and ArcGIS for efficient land use classification and mapping.</div>
+<div class="project-tags">
+<span class="project-tag">Python</span>
+<span class="project-tag">ArcGIS</span>
+<span class="project-tag">Automation</span>
+</div>
+</div>
+</div>
+<div class="project-card">
+<div class="project-content">
+<div class="project-title">Remote Sensing for Deforestation Analysis</div>
+<div class="project-desc">Utilized Google Earth Engine and Sentinel data to analyze deforestation patterns and provide actionable insights.</div>
+<div class="project-tags">
+<span class="project-tag">Google Earth Engine</span>
+<span class="project-tag">Sentinel Data</span>
+<span class="project-tag">Deforestation Analysis</span>
+</div>
+</div>
+</div>
+<div class="project-card">
+<div class="project-content">
+<div class="project-title">Business Analytics in Digital Sales</div>
+<div class="project-desc">Studied customer behavior using CRM data to optimize sales strategies and improve customer retention.</div>
+<div class="project-tags">
+<span class="project-tag">CRM</span>
+<span class="project-tag">Business Analytics</span>
+<span class="project-tag">Digital Sales</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Interests & Hobbies Section -->
+<section id="interests">
+<h2>Interests & Hobbies</h2>
+<div class="interests-hobbies">
+<div class="interest-card">
+<div class="interest-icon">🌍</div>
+<div class="interest-title">Advancements in GIS & Remote Sensing</div>
+<div class="interest-desc">Passionate about the latest technologies and methodologies in geospatial analysis and remote sensing.</div>
+</div>
+<div class="interest-card">
+<div class="interest-icon">📈</div>
+<div class="interest-title">Digital Marketing & Sales Strategies</div>
+<div class="interest-desc">Interested in exploring innovative digital marketing techniques and sales strategies to drive business growth.</div>
+</div>
+<div class="interest-card">
+<div class="interest-icon">💻</div>
+<div class="interest-title">Programming & IT Automation</div>
+<div class="interest-desc">Enthusiastic about automating workflows and developing efficient IT solutions using programming languages.</div>
+</div>
+<div class="interest-card">
+<div class="interest-icon">⚽</div>
+<div class="interest-title">Soccer & Athletics</div>
+<div class="interest-desc">Enjoy playing soccer and engaging in various athletic activities to stay fit and healthy.</div>
+</div>
+<div class="interest-card">
+<div class="interest-icon">📚</div>
+<div class="interest-title">Reading Tech Blogs & Novels</div>
+<div class="interest-desc">Love staying updated with the latest tech trends and enjoying a good novel in my free time.</div>
+</div>
+</div>
+</section>
+
+<!-- Referees Section -->
+<section id="referees">
+<h2>Referees</h2>
+<div class="referees-grid">
+<div class="referee-card">
+<div class="referee-name">Mr. Samson Makhanu</div>
+<div class="referee-position">Head of Carbon Department, Yocean Limited</div>
+<div class="referee-contact">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+<path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+<a href="tel:0706373879">0706373879</a>
+</div>
+</div>
+<div class="referee-card">
+<div class="referee-name">Mr. Collins Kirui</div>
+<div class="referee-position">Head of Sales Representatives</div>
+<div class="referee-contact">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+<path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+<a href="tel:0724660464">0724660464</a>
+</div>
+</div>
+<div class="referee-card">
+<div class="referee-name">Mr. Mulefu Oduori</div>
+<div class="referee-position">Chief Technician, Survey Department - JKUAT</div>
+<div class="referee-contact">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+<path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+<a href="tel:0712110811">0712110811</a>
+</div>
+</div>
+<div class="referee-card">
+<div class="referee-name">Dr. Mercy Mwaniki</div>
+<div class="referee-position">Chainlady, Department of Geomatic and Geospatial Information Science, JKUAT</div>
+<div class="referee-contact">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+<path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+<a href="tel:0789418010">0789418010</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+<h2>Contact Me</h2>
+<div class="contact-wrapper">
+<form class="contact-form" action="#" method="post">
+<div class="form-group">
+<input type="text" id="name" name="name" placeholder=" " required>
+<label for="name">Name</label>
+</div>
+<div class="form-group">
+<input type="email" id="email" name="email" placeholder=" " required>
+<label for="email">Email</label>
+</div>
+<div class="form-group">
+<textarea id="message" name="message" placeholder=" " required></textarea>
+<label for="message">Message</label>
+</div>
+<button type="submit" class="btn">Send Message</button>
+</form>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="social-links">
+<a href="https://www.linkedin.com/in/weldon-ruto-a48325312/" target="_blank">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+</svg>
+</a>
+<a href="https://github.com/portfolio-ops/portfolio_" target="_blank">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+</svg>
+</a>
+<a href="https://twitter.com/weldon_ruto" target="_blank">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+<path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.269A3.37 3.37 0 0 1 .78 13.58a9.394 9.394 0 0 0 5.033 1.466z"/>
+</svg>
+</a>
+</div>
+<div class="footer-text">© 2025 Weldon Ruto. All rights reserved.</div>
+</footer>
+
+<!-- JavaScript for Interactive Elements -->
+<script>
+// Hamburger Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('nav ul');
+
+hamburger.addEventListener('click', () => {
+nav.classList.toggle('active');
+});
+
+// Smooth Scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+document.querySelector(this.getAttribute('href')).scrollIntoView({
+behavior: 'smooth'
+});
+});
+});
+
+// Form Submission
+const form = document.querySelector('.contact-form');
+form.addEventListener('submit', (e) => {
+e.preventDefault();
+alert('Thank you for reaching out! I will get back to you soon.');
+form.reset();
+});
+</script>
+</body>
+</html>
